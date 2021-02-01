@@ -1,0 +1,27 @@
+{
+	"name": "node-red-contrib-limit-monitor",
+	"version": "1.0.0",
+	"description": "A limit monitor for Node-RED",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/patrickknabe/node-red-contrib-limit-monitor.git"
+	},
+	"keywords": [
+		"limit-monitor",
+		"node-red",
+		"alarm",
+		"delay",
+		"hysteresis"
+	],
+	"author": "Patrick Knabe",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/patrickknabe/node-red-contrib-limit-monitor/issues"
+	},
+	"homepage": "https://github.com/patrickknabe/node-red-contrib-limit-monitor#readme",
+	"node-red": {
+		"nodes": {
+			"limit-monitor": "limit-monitor.js"
+		}
+	}
+}

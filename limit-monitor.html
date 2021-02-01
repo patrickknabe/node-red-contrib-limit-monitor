@@ -1,0 +1,61 @@
+<script type="text/javascript">
+
+	RED.nodes.registerType( 'limit-monitor', {
+		category: 'function',
+		defaults: {
+			name: { value: '' },
+			topic: { value: '' },
+			limit: { value: '0' },
+			kind: { value: '1' },
+			delay: { value: '0', validate: RED.validators.regex( /^[0-9]+$/ ) },
+			hysteresis: { value: '0', validate: RED.validators.regex( /^[0-9]+$/ ) }
+		},
+		inputs: 1,
+		inputLabels: 'input',
+		outputs: 1,
+		outputLabels: 'output',
+		color: '#f78d86',
+		icon: 'serial.svg',
+		paletteLabel: 'limit monitor',
+		label: function() {
+			return this.name || 'limit monitor';
+		}
+	} );
+
+</script>
+
+<script type="text/html" data-template-name="limit-monitor">
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-fw fa-tag"></i> Name</label>
+		<input type="text" id="node-input-name" placeholder="Name" />
+	</div>
+	<div class="form-row">
+		<label for="node-input-topic"><i class="fa fa-fw fa-tasks"></i> Topic</label>
+		<input type="text" id="node-input-topic" placeholder="Topic" />
+	</div>
+	<br />
+	<div class="form-row">
+		<label for="node-input-limit"><i class="fa fa-fw fa-repeat"></i> Limit</label>
+		<input type="text" id="node-input-limit" style="text-align: center; width: 100px;" />
+	</div>
+	<br />
+	<div class="form-row">
+		<label for="node-input-kind"><i class="fa fa-fw fa-envelope"></i> Type</label>
+		<select id="node-input-kind" style="width: 35%;">
+			<option value="1">Lower limit</option>
+			<option value="2">Upper limit</option>
+		</select>
+	</div>
+	<div class="form-row">
+		<label for="node-input-delay"><i class="fa fa-fw fa-repeat"></i> Delay</label>
+		<input type="text" id="node-input-delay" style="text-align: center; width: 100px;" />
+		<span>seconds</span>
+	</div>
+	<div class="form-row">
+		<label for="node-input-hysteresis"><i class="fa fa-fw fa-repeat"></i> Hysteresis</label>
+		<input type="text" id="node-input-hysteresis" style="text-align: center; width: 100px;" />
+	</div>
+</script>
+
+<script type="text/html" data-help-name="limit-monitor">
+</script>
