@@ -64,7 +64,7 @@ module.exports = RED => {
 
 							break;
 
-						case state === 3 && msg.payload > limit - hysteresis:
+						case state === 3 && msg.payload > limit + hysteresis:
 							setStatus( 1 );
 							send();
 
