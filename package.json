@@ -7,11 +7,13 @@
 		"url": "git+https://github.com/patrickknabe/node-red-contrib-limit-monitor.git"
 	},
 	"keywords": [
-		"limit-monitor",
-		"node-red",
 		"alarm",
 		"delay",
-		"hysteresis"
+		"hysteresis",
+		"limit",
+		"monitor",
+		"node-red",
+		"observe"
 	],
 	"author": "Patrick Knabe",
 	"license": "MIT",
