@@ -1,15 +1,15 @@
 <script type="text/javascript">
 
 	RED.nodes.registerType( 'limit-monitor', {
-		category: 'function',
 		defaults: {
 			name: { value: '' },
 			topic: { value: '' },
-			limit: { value: '0' },
-			kind: { value: '1' },
+			limit: { value: '0', validate: RED.validators.regex( /^-?[0-9]+(\.[0-9]+)?$/ ) },
+			kind: { value: '1', validate: RED.validators.regex( /^[1,2]$/ ) },
 			delay: { value: '0', validate: RED.validators.regex( /^[0-9]+$/ ) },
-			hysteresis: { value: '0', validate: RED.validators.regex( /^[0-9]+$/ ) }
+			hysteresis: { value: '0', validate: RED.validators.regex( /^[0-9]+(\.[0-9]+)?$/ ) }
 		},
+		category: 'function',
 		inputs: 1,
 		outputs: 1,
 		color: '#f78d86',
@@ -33,27 +33,52 @@
 	</div>
 	<br />
 	<div class="form-row">
-		<label for="node-input-limit"><i class="fa fa-fw fa-repeat"></i> Limit</label>
+		<label for="node-input-limit"><i class="fa fa-fw fa-binoculars"></i> Limit</label>
 		<input type="text" id="node-input-limit" style="text-align: center; width: 100px;" />
 	</div>
 	<br />
 	<div class="form-row">
-		<label for="node-input-kind"><i class="fa fa-fw fa-envelope"></i> Type</label>
-		<select id="node-input-kind" style="width: 35%;">
+		<label for="node-input-kind"><i class="fa fa-fw fa-arrows-v"></i> Type</label>
+		<select id="node-input-kind" style="width: 120px;">
 			<option value="1">Lower limit</option>
 			<option value="2">Upper limit</option>
 		</select>
 	</div>
 	<div class="form-row">
-		<label for="node-input-delay"><i class="fa fa-fw fa-repeat"></i> Delay</label>
+		<label for="node-input-delay"><i class="fa fa-fw fa-clock-o"></i> Delay</label>
 		<input type="text" id="node-input-delay" style="text-align: center; width: 100px;" />
 		<span>seconds</span>
 	</div>
 	<div class="form-row">
-		<label for="node-input-hysteresis"><i class="fa fa-fw fa-repeat"></i> Hysteresis</label>
+		<label for="node-input-hysteresis"><i class="fa fa-fw fa-level-down"></i> Hysteresis</label>
 		<input type="text" id="node-input-hysteresis" style="text-align: center; width: 100px;" />
 	</div>
 </script>
 
 <script type="text/html" data-help-name="limit-monitor">
+	<p style="text-align: justify;">
+		A limit monitor for Node-RED. An upper limit or a lower limit can be monitored. The alarm
+		triggering can be delayed and the leaving of the alarm state can be controlled by a hysteresis.
+	</p>
+	<p style="text-align: justify;">
+		The value to be monitored is received in numeric form via <code>msg.payload</code>. A violation of
+		the entered <b>Limit</b> generates an output message with <code>true</code> in <code>msg.payload</code>.
+		If the violation is removed, a message with <code>false</code> in <code>msg.payload</code> is sent.
+	</p>
+	<p style="text-align: justify;">
+		Set the kind of the limit, upper or lower, using the <b>Type</b> parameter.
+	</p>
+	<p style="text-align: justify;">
+		The triggering can be delayed by an adjustable number of seconds using the <b>Delay</b> parameter.
+		When monitoring an upper limit, the limit value must be reached or exceeded for the set delay time to indicate
+		the limit violation. A lower limit must be reached or undershot for the delay time to generate an output message.
+	</p>
+	<p style="text-align: justify;">
+		The <b>Hysteresis</b> parameter indicates by how much the input value must fall below (upper limit) or exceed
+		(lower limit) a set limit value again when the alarm is active in order to reset the alarm.
+	</p>
+	<p style="text-align: justify;">
+		Each outgoing message also contains <code>msg.timestamp</code>, which specifies the time of the status change in
+		milliseconds since 1.1.1970.
+	</p>
 </script>
