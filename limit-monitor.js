@@ -3,8 +3,8 @@ module.exports = RED => {
 		RED.nodes.createNode( this, config );
 
 		const limit = parseFloat( config.limit ) || 0;
-		const delay = ( parseFloat( config.delay ) || 0 ) * 1000;
-		const hysteresis = parseFloat( config.hysteresis ) || 0;
+		const delay = Math.abs( ( parseFloat( config.delay ) || 0 ) ) * 1000;
+		const hysteresis = Math.abs( parseFloat( config.hysteresis ) || 0 );
 
 		// 1: no alarm
 		// 2: delaying
